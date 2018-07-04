@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require babel-register ./test/**/*.spec.js",
-    "spec": "mocha -R markdown > test/spec.md",
+    "spec": "mocha --require babel-register -R markdown > test/spec.md",
     "prepublishOnly": "npm run test && npm run spec"
   },
   "repository": {
