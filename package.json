@@ -16,5 +16,8 @@
     "library"
   ],
   "author": "kevinnwang@tencent.com",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.10"
+  }
 }
