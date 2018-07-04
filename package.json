@@ -4,7 +4,7 @@
   "description": "stockfe utils library",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --require babel-register ./test/**/*.spec.js",
     "spec": "mocha -R markdown > test/spec.md",
     "prepublishOnly": "npm run test && npm run spec"
   },
@@ -17,12 +17,19 @@
     "util",
     "library"
   ],
-  "author": "kevinnwang@tencent.com",
+  "author": [
+    "kevinnwang <kevinnwang@tencent.com> (http://kezhen.info)",
+    "kevinhliu <kevinhliu@tencent.com>",
+    "jonahwang <jonahwang@tencent.com>"
+  ],
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.10"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
     "mocha": "^5.2.0"
   }
 }
