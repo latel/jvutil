@@ -15,7 +15,7 @@ charset = utf-8
 # 缩进风格为空格
 indent_style = space
 # 缩进4个空格
-indent_size = 4
+indent_size = 2
 
 # 匹配JSON文件
 [*.json]

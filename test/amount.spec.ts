@@ -1,5 +1,5 @@
-import 'chai/register-expect';
-import math, { add, reduce, div, mul, eq, lt, gt } from '../math';
+import { expect, assert } from 'chai';
+import math, { add, reduce, div, mul, eq, lt, gt } from '../src/math';
 
 describe('math', () => {
     describe('#add()', () => {
@@ -35,7 +35,6 @@ describe('math', () => {
             expect(math(.06).div(.2).value()).to.equal(.3);
         });
         it.skip('should throw error when denominator is zero', () => {
-            assert.throw(div(4, 0));
         });
     });
     describe('#mul()', () => {
