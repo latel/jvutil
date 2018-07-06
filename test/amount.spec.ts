@@ -1,108 +1,55 @@
 import { expect, assert } from 'chai';
-import math, { add, reduce, div, mul, eq, lt, gt } from '../src/math';
+import { yuan2fen, fen2yuan, toText, toCurrency } from '../src/amount';
 
-describe('math', () => {
-    describe('#add()', () => {
-        it('should return 3 when 1 + 2', () => {
-            expect(add(1, 2)).to.equal(3);
-        });
-        it('should return 0.003 when 0.001 + 0.002', () => {
-            expect(add(0.001, 0.002)).to.equal(0.003);
-        });
-        it('should return 3.005 when 1.002 + 2.003(chain mode)', () => {
-            expect(math(1.002).add(2.003).value()).to.equal(3.005);
-        });
+describe('amount', () => {
+  describe('#yuan2fen()', () => {
+    it('should return "312" transforming 3.12 yuan to fen', () => {
+      expect(yuan2fen(3.12)).to.equal('312.00');
     });
-    describe('#reduce()', () => {
-        it('should return 1 when 3 - 2', () => {
-            expect(reduce(3, 1)).to.equal(2);
-        });
-        it('should return 0.001 when 0.006 - 0.005', () => {
-            expect(reduce(0.006, 0.005)).to.equal(0.001);
-        });
-        it('should return -1.006 when 1 - 2.006(chain mode)', () => {
-            expect(math(1).reduce(2.006).value()).to.equal(-1.006);
-        });
+    it('should return "312" transforming "3.12"(string) yuan to fen', () => {
+      expect(yuan2fen('3.12')).to.equal('312.00');
     });
-    describe('#div()', () => {
-        it('should return 2 when 4 / 2', () => {
-            expect(div(4, 2)).to.equal(2);
-        });
-        it('should return 0.003 when 0.0006 / 0.2', () => {
-            expect(div(.0006, .2)).to.equal(.003);
-        });
-        it('should return 0.3 when 0.06 / 0.2(chain mode)', () => {
-            expect(math(.06).div(.2).value()).to.equal(.3);
-        });
-        it.skip('should throw error when denominator is zero', () => {
-        });
+  });
+  describe('#fen2yuan()', () => {
+    it('should return "3.12" transforming 312 fen to yuan', () => {
+      expect(fen2yuan(312)).to.equal('3.12');
     });
-    describe('#mul()', () => {
-        it('should return 6 when 2 * 3', () => {
-            expect(mul(2, 3)).to.equal(6);
-        });
-        it('should return 0.0000000006 when 0.002 * 0.003', () => {
-            expect(mul(.002, .003)).to.equal(.000006);
-        });
-        it('should return 0.000006 when 0.002 * 0.003(chain mode)', () => {
-            expect(math(.002).mul(.003).value()).to.equal(.000006);
-        });
+    it('should return "3.12" transforming "312"(string) fen to yuan', () => {
+      expect(fen2yuan('312')).to.equal('3.12');
     });
-    describe('#equal()', () => {
-        it('should return true compare 2 and 2', () => {
-            expect(eq(2, 2)).to.be.true;
-        });
-        it('should return true compare 0.002 and 0.002', () => {
-            expect(eq(.002, .002)).to.be.true;
-        });
-        it('should return true compare 0.002 and 0.003', () => {
-            expect(eq(.002, .003)).to.be.false;
-        });
-        it('should return true compare 0.002 and 0.002(chain mode)', () => {
-            expect(math(.002).eq(.002)).to.be.true;
-        });
-        it('should return false compare 0.002 and 0.003(chain mode)', () => {
-            expect(math(.002).eq(.003)).to.be.false;
-        });
+  });
+  describe('#toText()', () => {
+    it('should return 1.23亿 from toText(123456789)', () => {
+      expect(toText(123456789)).to.equal('1.23亿');
     });
-    describe('#lt()', () => {
-        it('expect 0.001 to be lower than 0.002', () => {
-            expect(lt(.001, .002)).to.be.true;
-        });
-        it('expect 0.003 to be not lower than 0.002', () => {
-            expect(lt(.003, .002)).to.be.false;
-        });
-        it('expect 0.003 to be not lower than 0.003', () => {
-            expect(lt(.003, .003)).to.be.false;
-        });
-        it('should return true as 0.003 is lower than 0.004(chain mode)', () => {
-            expect(math(.003).lt(.004)).to.be.true;
-        });
-        it('should return false as 0.003 is larger than 0.002(chain mode)', () => {
-            expect(math(.003).lt(.002)).to.be.false;
-        });
-        it('should return false as 0.003 is equal to 0.003(chain mode)', () => {
-            expect(math(.003).lt(.003)).to.be.false;
-        });
+    it('decimal test, should return 1.2346亿 from toText(123456789, 4)', () => {
+      expect(toText(123456789, 4)).to.equal('1.2346亿');
     });
-    describe('#gt()', () => {
-        it('expect 0.002 to be larger than 0.001', () => {
-            expect(gt(.002, .001)).to.be.true;
-        });
-        it('expect 0.002 to be not larger than 0.003', () => {
-            expect(gt(.002, .003)).to.be.false;
-        });
-        it('expect 0.002 to be not larger than 0.002', () => {
-            expect(gt(.002, .002)).to.be.false;
-        });
-        it('should return false as 0.003 is lower than 0.004(chain mode)', () => {
-            expect(math(.003).gt(.004)).to.be.false;
-        });
-        it('should return true as 0.003 is larger than 0.002(chain mode)', () => {
-            expect(math(.003).gt(.002)).to.be.true;
-        });
-        it('should return false as 0.003 is equal to 0.003(chain mode)', () => {
-            expect(math(.003).gt(.003)).to.be.false;
-        });
+    it('unit test, should return 1.2346亿手 from toText(123456789, 4, \'手\')', () => {
+      expect(toText(123456789, 4, '手')).to.equal('1.2346亿手');
     });
+    it('default level test, should return 1234 from toText(1234)', () => {
+      expect(toText(1234)).to.equal('1234.00');
+    });
+    it('level test, should return 12345.0000张 from toText(12345, 4, \'张\', 10000)', () => {
+      expect(toText(12345, 4, '张', 100000)).to.equal('12345.0000张');
+    });
+    it('level test, should return 1.23万张 from toText(123456, 2, \'张\', 100000)', () => {
+      expect(toText(123456, 2, '张', 100000)).to.equal('12.35万张');
+    });
+  });
+  describe('#toCurrency()', () => {
+    it('should return "1,234.00" from toCurrency(1234)', () => {
+      expect(toCurrency(1234)).to.equal('1,234.00');
+    });
+    it('low number test, should return "123.00" from toCurrency(123)', () => {
+      expect(toCurrency(123)).to.equal('123.00');
+    });
+    it('decimal test, should return "1,234,567.000" from toCurrency(1234567, 3)', () => {
+      expect(toCurrency(1234567, 3)).to.equal('1,234,567.000');
+    });
+    it('decimal test, should return "1,234,567" from toCurrency(1234567, 0)', () => {
+      expect(toCurrency(1234567, 0)).to.equal('1,234,567');
+    });
+  });
 });
