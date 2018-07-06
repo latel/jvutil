@@ -14,11 +14,9 @@ import { math } from '@tencent/stockfe-util';
 console.log(math.add(.002, .003));
 ```
 
-## 本大礼包内容
+## 这个大礼包包含什么内容
 
-| 模块        | 功能    |  状态  |
-| --------   | -----:   | :----: |
-| [math](./docs/math.md)        | 小数安全的精确计算，支持链式调用和更直观表达式计算能力  |   正常    |
+[参阅本模块的wiki](http://git.code.oa.com/westock/stockutil/wikis/home)
 
 
 ## 开发准则
