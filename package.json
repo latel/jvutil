@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run test -- --watch --watch-extensions ts",
     "test": "mocha --require ts-node/register ./test/**/*.spec.ts",
-    "spec": "mocha --require ts-node/register -R markdown > test/spec.md",
+    "spec": "mocha --require ts-node/register ./test/**/*.spec.ts -R markdown > test/spec.md",
     "build": "tsc --pretty --emitDeclarationOnly && babel src --out-dir . --extensions \".ts\"",
     "prepublishOnly": "npm run test && npm run spec && npm run build"
   },
