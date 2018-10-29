@@ -9,7 +9,7 @@ tnpm i -S @tencent/stockfe-util;
 ### 引用
 
 ```javascript
-import { math } from '@tencent/stockfe-util';
+import math from '@tencent/stockfe-util/math';
 
 console.log(math.add(.002, .003));
 ```

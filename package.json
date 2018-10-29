@@ -1,13 +1,13 @@
 {
   "name": "@tencent/stockfe-util",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "stockfe utils library",
   "main": "index.js",
   "scripts": {
     "dev": "npm run test -- --watch --watch-extensions ts",
     "test": "mocha --require ts-node/register ./test/**/*.spec.ts",
     "spec": "mocha --require ts-node/register ./test/**/*.spec.ts -R markdown > test/spec.md",
-    "build": "tsc --pretty --emitDeclarationOnly && babel src --out-dir . --extensions \".ts\"",
+    "build": "tsc ./src/* --outDir .",
     "prepublishOnly": "npm run test && npm run spec && npm run build"
   },
   "repository": {
@@ -26,16 +26,9 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.10",
-    "lodash-es": "^4.17.10"
+    "lodash-es": "^4.17.11"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.51",
-    "@babel/core": "^7.0.0-beta.51",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.51",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.51",
-    "@babel/preset-env": "^7.0.0-beta.51",
-    "@babel/preset-typescript": "^7.0.0-beta.51",
     "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.4",
     "chai": "^4.1.2",
