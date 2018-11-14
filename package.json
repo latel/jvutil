@@ -1,6 +1,6 @@
 {
   "name": "@tencent/stockfe-util",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "stockfe utils library",
   "main": "index.js",
   "scripts": {

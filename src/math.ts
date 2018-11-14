@@ -92,91 +92,94 @@ const div = (arg1: number, arg2: number): number => {
 
 // 判断两个数字是否相等
 const eq = (a: number, b: number): boolean => {
+  // 确保在非ts下也是一个数字
   // @ts-ignore
   a = parseFloat(a);
   // @ts-ignore
   b = parseFloat(b);
 
   if (
-    typeof a === "number" &&
-    typeof b === "number" &&
-    !isNaN(a) &&
-    !isNaN(b)
+    !Number.isNaN(a) &&
+    !Number.isNaN(b)
   ) {
     return a === b;
+  } else {
+    throw 'must provide two numbers to make a comparison';
   }
 };
 
 // 判断前一个数是否大于后一个数
 const gt = (a: number, b: number): boolean => {
+  // 确保在非ts下也是一个数字
   // @ts-ignore
   a = parseFloat(a);
   // @ts-ignore
   b = parseFloat(b);
 
   if (
-    typeof a === "number" &&
-    typeof b === "number" &&
-    !isNaN(a) &&
-    !isNaN(b)
+    !Number.isNaN(a) &&
+    !Number.isNaN(b)
   ) {
     return a > b;
+  } else {
+    throw 'must provide two numbers to make a comparison';
   }
 };
 
 // 判断前一个数是否小于第二个数
 const lt = (a: number, b: number): boolean => {
+  // 确保在非ts下也是一个数字
   // @ts-ignore
   a = parseFloat(a);
   // @ts-ignore
   b = parseFloat(b);
 
   if (
-    typeof a === "number" &&
-    typeof b === "number" &&
-    !isNaN(a) &&
-    !isNaN(b)
+    !Number.isNaN(a) &&
+    !Number.isNaN(b)
   ) {
     return a < b;
+  } else {
+    throw 'must provide two numbers to make a comparison';
   }
 };
 
 // 链式调用支持
 class AccMath {
   val: number;
-  constructor(initialValue) {
+  constructor(initialValue: number) {
     this.val = initialValue || 0;
   }
 
-  add(a) {
+  add(a: number) {
     this.val = add(this.val, a);
     return this;
   }
 
-  reduce(a) {
+  reduce(a: number) {
     this.val = reduce(this.val, a);
     return this;
   }
 
-  div(a) {
+  div(a: number) {
     this.val = div(this.val, a);
     return this;
   }
 
-  mul(a) {
+  mul(a: number) {
     this.val = mul(this.val, a);
     return this;
   }
 
-  eq(a) {
+  eq(a: number) {
     return eq(this.val, a);
   }
 
-  gt(a) {
+  gt(a: number) {
     return gt(this.val, a);
   }
 
-  lt(a) {
+  lt(a: number) {
     return lt(this.val, a);
   }
 
@@ -185,7 +188,7 @@ class AccMath {
   }
 }
 
-function math(initialValue) {
+function math(initialValue: number) {
   return new AccMath(initialValue);
 }
 
