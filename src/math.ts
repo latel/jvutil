@@ -99,8 +99,8 @@ const eq = (a: number, b: number): boolean => {
   b = parseFloat(b);
 
   if (
-    !Number.isNaN(a) &&
-    !Number.isNaN(b)
+    !isNaN(a) &&
+    !isNaN(b)
   ) {
     return a === b;
   } else {
@@ -117,8 +117,8 @@ const gt = (a: number, b: number): boolean => {
   b = parseFloat(b);
 
   if (
-    !Number.isNaN(a) &&
-    !Number.isNaN(b)
+    !isNaN(a) &&
+    !isNaN(b)
   ) {
     return a > b;
   } else {
@@ -135,8 +135,8 @@ const lt = (a: number, b: number): boolean => {
   b = parseFloat(b);
 
   if (
-    !Number.isNaN(a) &&
-    !Number.isNaN(b)
+    !isNaN(a) &&
+    !isNaN(b)
   ) {
     return a < b;
   } else {
