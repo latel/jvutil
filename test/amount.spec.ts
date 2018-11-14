@@ -37,6 +37,9 @@ describe('amount', () => {
     it('level test, should return 1.23万张 from toText(123456, 2, \'张\', 100000)', () => {
       expect(toText(123456, 2, '张', 100000)).to.equal('12.35万张');
     });
+    it('negative number test, should return -1.23万张 from toText(-123456, 2, \'张\', 100000)', () => {
+      expect(toText(-123456, 2, '张', 100000)).to.equal('-12.35万张');
+    });
   });
   describe('#toCurrency()', () => {
     it('should return "1,234.00" from toCurrency(1234)', () => {

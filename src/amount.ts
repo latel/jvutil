@@ -21,35 +21,40 @@ export const fen2yuan = (val: number | string): string => {
 
 /**
  * 格式化大数为指定的单位，如：12345.67 => 1.23万
- * @param val 需要转换的数字
+ * @param value 需要转换的数字
  * @param unit 单位（股/手/张等）
  * @param decimal 需要保留的小数位个数
  * @param level 转换最低级别，如需要超过10万才转换
  */
 export const toText = (
-  val: number | string,
+  value: number | string,
   decimal?: number,
   unit?: string,
   level?: number
-): string => {
-  val = Number(val) || 0;
+): string | number => {
+  let val: string| number = +value;
+  // 不对异常数据处理
+  if (Number.isNaN(val)) {
+    return value;
+  }
+  let absVal = Math.abs(val);
   // 默认转换万以上的数字
   level = level || 10000;
   // 默认保留两位小数
   decimal = decimal === undefined ? 2 : decimal;
   // 默认单位为空
   unit = unit || "";
-  if (val < Math.pow(10, 4) || val < level) {
+  if (absVal < Math.pow(10, 4) || absVal < level) {
     val = val.toFixed(decimal);
-  } else if (val >= Math.pow(10, 4) && val < Math.pow(10, 6)) {
+  } else if (absVal >= Math.pow(10, 4) && absVal < Math.pow(10, 6)) {
     val = (val / 10000).toFixed(decimal) + "万";
-  } else if (val >= Math.pow(10, 6) && val < Math.pow(10, 8)) {
+  } else if (absVal >= Math.pow(10, 6) && absVal < Math.pow(10, 8)) {
     val = (val / 1000000).toFixed(decimal) + "百万";
-  } else if (val >= Math.pow(10, 8) && val < Math.pow(10, 11)) {
+  } else if (absVal >= Math.pow(10, 8) && absVal < Math.pow(10, 11)) {
     val = (val / 100000000).toFixed(decimal) + "亿";
-  } else if (val >= Math.pow(10, 11) && val < Math.pow(10, 12)) {
+  } else if (absVal >= Math.pow(10, 11) && absVal < Math.pow(10, 12)) {
     val = (val / 100000000000).toFixed(decimal) + "千亿";
-  } else if (val >= Math.pow(10, 12) && val < Math.pow(10, 16)) {
+  } else if (absVal >= Math.pow(10, 12) && absVal < Math.pow(10, 16)) {
     val = (val / 1000000000000).toFixed(decimal) + "万亿";
   } else {
     val = (val / Math.pow(10, 16)).toFixed(decimal) + "兆";
@@ -92,7 +97,6 @@ export const toCurrency = (val: number | string, decimal?: number): string => {
       flag = 0;
     }
   }
-  pattern = null;
   return sign + start + tmp + bit;
 };
 
