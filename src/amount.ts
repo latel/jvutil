@@ -34,7 +34,7 @@ export const toText = (
 ): string | number => {
   let val: string| number = +value;
   // 不对异常数据处理
-  if (Number.isNaN(val)) {
+  if (isNaN(val)) {
     return value;
   }
   let absVal = Math.abs(val);
