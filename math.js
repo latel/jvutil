@@ -93,43 +93,49 @@ var div = function (arg1, arg2) {
 exports.div = div;
 // 判断两个数字是否相等
 var eq = function (a, b) {
+    // 确保在非ts下也是一个数字
     // @ts-ignore
     a = parseFloat(a);
     // @ts-ignore
     b = parseFloat(b);
-    if (typeof a === "number" &&
-        typeof b === "number" &&
-        !isNaN(a) &&
+    if (!isNaN(a) &&
         !isNaN(b)) {
         return a === b;
+    }
+    else {
+        throw 'must provide two numbers to make a comparison';
     }
 };
 exports.eq = eq;
 // 判断前一个数是否大于后一个数
 var gt = function (a, b) {
+    // 确保在非ts下也是一个数字
     // @ts-ignore
     a = parseFloat(a);
     // @ts-ignore
     b = parseFloat(b);
-    if (typeof a === "number" &&
-        typeof b === "number" &&
-        !isNaN(a) &&
+    if (!isNaN(a) &&
         !isNaN(b)) {
         return a > b;
+    }
+    else {
+        throw 'must provide two numbers to make a comparison';
     }
 };
 exports.gt = gt;
 // 判断前一个数是否小于第二个数
 var lt = function (a, b) {
+    // 确保在非ts下也是一个数字
     // @ts-ignore
     a = parseFloat(a);
     // @ts-ignore
     b = parseFloat(b);
-    if (typeof a === "number" &&
-        typeof b === "number" &&
-        !isNaN(a) &&
+    if (!isNaN(a) &&
         !isNaN(b)) {
         return a < b;
+    }
+    else {
+        throw 'must provide two numbers to make a comparison';
     }
 };
 exports.lt = lt;
