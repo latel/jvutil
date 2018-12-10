@@ -1,11 +1,5 @@
 // 探测运行环境并标记各个全局环境变量
 /*eslint-disable*/
-// 用于测试用例 - b
-// import { JSDOM } from 'jsdom';
-// const jsdom = new JSDOM('<!DOCTYPE HTML><html><body></body></html>');
-// const { window } = jsdom;
-// const { userAgent: UA, platform: PLATFORM } = window.navigator;
-// 用于测试用例 - e
 const { userAgent: UA, platform: PLATFORM } = navigator;
 
 export const IS_MQQ = UA.match(/QQ\/([\d.]+)/i) && (UA.match(/QQ\/([\d.]+)/i) || [])[1] || null;
