@@ -201,3 +201,4 @@ tags
 # End of https://www.gitignore.io/api/macos,visualstudiocode,intellij+all,vim,node
 
 test/spec.md
+.history

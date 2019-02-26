@@ -47,7 +47,7 @@ let webkit = UA.match(/Web[kK]it[\/]{0,1}([\d.]+)/),
     webview ||
     UA.match(/Version\/([\d.]+)([^S](Safari)|[^M]*(Mobile)[^S]*(Safari))/);
 
-if ((browser.webkit = !!webkit)) {browser.version = webkit[1];}
+if ((browser.webkit = !!webkit)) {browser.version = (<string[]>webkit)[1];}
 
 if (android) {(os.android = true), (os.version = android[2]);}
 if (iphone && !ipod)
