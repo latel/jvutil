@@ -87,6 +87,9 @@ const div = (arg1: number, arg2: number): number => {
   c = Math.max(t1, t2);
   r1 = Number(arg1.toString().replace(".", ""));
   r2 = Number(arg2.toString().replace(".", ""));
+  if (r2 === 0) {
+    throw RangeError('no one can be dived by zero');
+  }
   return +((r1 / r2) * Math.pow(10, t2 - t1)).toFixed(c);
 };
 

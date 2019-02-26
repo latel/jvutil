@@ -34,7 +34,8 @@ describe('math', () => {
         it('should return 0.3 when 0.06 / 0.2(chain mode)', () => {
             expect(math(.06).div(.2).value()).to.equal(.3);
         });
-        it.skip('should throw error when denominator is zero', () => {
+        it('should throw error when denominator is zero', () => {
+            expect(math(.06).div.bind(math, 0)).to.throw();
         });
     });
     describe('#mul()', () => {
