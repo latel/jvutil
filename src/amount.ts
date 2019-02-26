@@ -71,8 +71,11 @@ export const toCurrency = (val: number | string, decimal?: number): string => {
   val = String(val) || "";
   decimal = typeof decimal === "undefined" ? 2 : decimal;
   var pattern = /^(\-?)(\d+)(\.\d+)?$/,
-    macher = pattern.exec(val),
-    sign = null != macher ? RegExp.$1 || "" : "",
+    macher = pattern.exec(val);
+  if (macher === null) {
+    return val;
+  }
+  var sign = null != macher ? RegExp.$1 || "" : "",
     integer = null != macher ? RegExp.$2 || "0" : "0",
     bit = null != macher ? RegExp.$3 || ".00" : ".00",
     size = integer.length,

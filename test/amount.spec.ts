@@ -54,5 +54,8 @@ describe('amount', () => {
     it('decimal test, should return "1,234,567" from toCurrency(1234567, 0)', () => {
       expect(toCurrency(1234567, 0)).to.equal('1,234,567');
     });
+    it('expection test, should return "--" from toCurrency(--)', () => {
+      expect(toCurrency('--')).to.equal('--');
+    });
   });
 });
