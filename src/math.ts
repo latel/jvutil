@@ -72,7 +72,7 @@ const mul = (arg1: number, arg2: number) => {
 };
 
 // 数字相除
-const div = (arg1: number, arg2: number): number => {
+const div = (arg1: number, arg2: number, acc: number = 2): number => {
   var t1 = 0,
     t2 = 0,
     r1,
@@ -84,7 +84,7 @@ const div = (arg1: number, arg2: number): number => {
   try {
     t2 = arg2.toString().split(".")[1].length;
   } catch (e) {}
-  c = Math.max(t1, t2);
+  c = Math.max(t1, t2, acc);
   r1 = Number(arg1.toString().replace(".", ""));
   r2 = Number(arg2.toString().replace(".", ""));
   if (r2 === 0) {

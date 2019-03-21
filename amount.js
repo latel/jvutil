@@ -70,7 +70,11 @@ exports.toText = function (value, decimal, unit, level) {
 exports.toCurrency = function (val, decimal) {
     val = String(val) || "";
     decimal = typeof decimal === "undefined" ? 2 : decimal;
-    var pattern = /^(\-?)(\d+)(\.\d+)?$/, macher = pattern.exec(val), sign = null != macher ? RegExp.$1 || "" : "", integer = null != macher ? RegExp.$2 || "0" : "0", bit = null != macher ? RegExp.$3 || ".00" : ".00", size = integer.length, mod = size > 3 ? size % 3 : 0, tmp = "", start = 0 == mod ? "" : integer.substr(0, mod) + ",", flag = 0;
+    var pattern = /^(\-?)(\d+)(\.\d+)?$/, macher = pattern.exec(val);
+    if (macher === null) {
+        return val;
+    }
+    var sign = null != macher ? RegExp.$1 || "" : "", integer = null != macher ? RegExp.$2 || "0" : "0", bit = null != macher ? RegExp.$3 || ".00" : ".00", size = integer.length, mod = size > 3 ? size % 3 : 0, tmp = "", start = 0 == mod ? "" : integer.substr(0, mod) + ",", flag = 0;
     if (decimal == 0) {
         bit = "";
     }

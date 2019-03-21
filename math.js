@@ -75,7 +75,8 @@ var mul = function (arg1, arg2) {
 };
 exports.mul = mul;
 // 数字相除
-var div = function (arg1, arg2) {
+var div = function (arg1, arg2, acc) {
+    if (acc === void 0) { acc = 2; }
     var t1 = 0, t2 = 0, r1, r2, c;
     try {
         t1 = arg1.toString().split(".")[1].length;
@@ -85,9 +86,12 @@ var div = function (arg1, arg2) {
         t2 = arg2.toString().split(".")[1].length;
     }
     catch (e) { }
-    c = Math.max(t1, t2);
+    c = Math.max(t1, t2, acc);
     r1 = Number(arg1.toString().replace(".", ""));
     r2 = Number(arg2.toString().replace(".", ""));
+    if (r2 === 0) {
+        throw RangeError('no one can be dived by zero');
+    }
     return +((r1 / r2) * Math.pow(10, t2 - t1)).toFixed(c);
 };
 exports.div = div;
