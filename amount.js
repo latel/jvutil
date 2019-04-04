@@ -42,23 +42,11 @@ exports.toText = function (value, decimal, unit, level) {
     if (absVal < Math.pow(10, 4) || absVal < level) {
         val = val.toFixed(decimal);
     }
-    else if (absVal >= Math.pow(10, 4) && absVal < Math.pow(10, 6)) {
+    else if (absVal >= Math.pow(10, 4) && absVal < Math.pow(10, 8)) {
         val = (val / 10000).toFixed(decimal) + "万";
-    }
-    else if (absVal >= Math.pow(10, 6) && absVal < Math.pow(10, 8)) {
-        val = (val / 1000000).toFixed(decimal) + "百万";
     }
     else if (absVal >= Math.pow(10, 8) && absVal < Math.pow(10, 11)) {
         val = (val / 100000000).toFixed(decimal) + "亿";
-    }
-    else if (absVal >= Math.pow(10, 11) && absVal < Math.pow(10, 12)) {
-        val = (val / 100000000000).toFixed(decimal) + "千亿";
-    }
-    else if (absVal >= Math.pow(10, 12) && absVal < Math.pow(10, 16)) {
-        val = (val / 1000000000000).toFixed(decimal) + "万亿";
-    }
-    else {
-        val = (val / Math.pow(10, 16)).toFixed(decimal) + "兆";
     }
     return val + unit;
 };
