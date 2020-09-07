@@ -66,8 +66,9 @@ export const toText = (
  * 转换为常用货币展示格式，按千分割数字，如：12345.67 => 12,345.67
  * @param val 需要转换的数字
  * @param decimal 需要保留的小数位个数
+ * @param strip 取出结尾多余的0，如12345.00 => 12,345.00
  */
-export const toCurrency = (val: number | string, decimal?: number): string => {
+export const toCurrency = (val: number | string, decimal?: number, strip = true): string => {
   val = String(val) || "";
   decimal = typeof decimal === "undefined" ? 2 : decimal;
   var pattern = /^(\-?)(\d+)(\.\d+)?$/,
