@@ -58,7 +58,7 @@ export const toText = (
   } else if (absVal >= Math.pow(10, 8) && absVal < Math.pow(10, 11)) {
     ret = (val / 100000000).toFixed(decimal) + "亿";
   }
-  ret = strip ? ret.replace(/\.?0+$/, "") : ret;
+  ret = strip ? ret.replace(/\.?0+([万亿]?)$/, "$1") : ret;
   return ret + unit;
 };
 

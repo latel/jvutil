@@ -34,10 +34,8 @@ describe("amount", () => {
     it("default level test, should return 1234.00 from toText(1234, 2, { strip: false })", () => {
       expect(toText(1234, 2, { strip: false })).to.equal("1234.00");
     });
-    it("level test, should return 1.23万张 from toText(12345, 2, {unit:'张', level:10000})", () => {
-      expect(toText(12345, 2, { unit: "张", level: 10000 })).to.equal(
-        "1.23万张"
-      );
+    it("level test, should return 10万 from toText(100000)", () => {
+      expect(toText(100000)).to.equal("10万");
     });
     it("level test, should return 1.2345万张 from toText(12345, 4, {unit:'张', level:10000})", () => {
       expect(toText(12345, 4, { unit: "张", level: 10000 })).to.equal(

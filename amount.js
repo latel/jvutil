@@ -51,8 +51,10 @@ exports.toText = function (value, decimal, options) {
  * 转换为常用货币展示格式，按千分割数字，如：12345.67 => 12,345.67
  * @param val 需要转换的数字
  * @param decimal 需要保留的小数位个数
+ * @param strip 取出结尾多余的0，如12345.00 => 12,345.00
  */
-exports.toCurrency = function (val, decimal) {
+exports.toCurrency = function (val, decimal, strip) {
+    if (strip === void 0) { strip = true; }
     val = String(val) || "";
     decimal = typeof decimal === "undefined" ? 2 : decimal;
     var pattern = /^(\-?)(\d+)(\.\d+)?$/, macher = pattern.exec(val);
