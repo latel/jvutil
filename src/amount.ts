@@ -19,39 +19,47 @@ export const fen2yuan = (val: number | string): string => {
   return REGEX_A_NUMBER.test(val) ? (parseFloat(val) / 100).toFixed(2) : "0.00";
 };
 
+interface ToTextOptions {
+  /** 单位（股/手/张等） */
+  unit?: string;
+  /** 转换最低级别，如需要超过10万才转换 */
+  level?: number;
+  /** 是否尽可能的去除尾部多余的0，如1.200张->1.2张 */
+  strip?: boolean;
+}
+
 /**
  * 格式化大数为指定的单位，如：12345.67 => 1.23万
  * @param value 需要转换的数字
- * @param unit 单位（股/手/张等）
- * @param decimal 需要保留的小数位个数
- * @param level 转换最低级别，如需要超过10万才转换
+ * @param decimal 需要保留的小数位个数，默认两位
+ * @param options 额外参数
  */
 export const toText = (
   value: number | string,
-  decimal?: number,
-  unit?: string,
-  level?: number
+  decimal = 2,
+  options?: ToTextOptions
 ): string | number => {
-  let val: string| number = +value;
+  const {
+    unit = "" /* 默认单位为空 */,
+    level = 10000 /* 默认转换万以上的数字 */,
+    strip = true /* 默认去除多余的尾部0，如1.20万->1.2万 */,
+  } = options || {};
+  let val: number = +value;
+  let ret: string = String(val);
   // 不对异常数据处理
   if (isNaN(val)) {
     return value;
   }
   let absVal = Math.abs(val);
-  // 默认转换万以上的数字
-  level = level || 10000;
-  // 默认保留两位小数
-  decimal = decimal === undefined ? 2 : decimal;
-  // 默认单位为空
-  unit = unit || "";
   if (absVal < Math.pow(10, 4) || absVal < level) {
-    val = val.toFixed(decimal);
+    ret = val.toFixed(decimal);
   } else if (absVal >= Math.pow(10, 4) && absVal < Math.pow(10, 8)) {
-    val = (val / 10000).toFixed(decimal) + "万";
+    ret = (val / 10000).toFixed(decimal) + "万";
   } else if (absVal >= Math.pow(10, 8) && absVal < Math.pow(10, 11)) {
-    val = (val / 100000000).toFixed(decimal) + "亿";
+    ret = (val / 100000000).toFixed(decimal) + "亿";
   }
-  return val + unit;
+  ret = strip ? ret.replace(/\.?0+$/, "") : ret;
+  return ret + unit;
 };
 
 /**
@@ -80,9 +88,10 @@ export const toCurrency = (val: number | string, decimal?: number): string => {
   } else if (bit.length >= decimal + 1) {
     bit = bit.substr(0, decimal + 1);
   } else {
-    bit = (
-      bit + new Array(decimal + 1 - bit.length + 1).join("0")
-    ).substr(0, decimal + 1);
+    bit = (bit + new Array(decimal + 1 - bit.length + 1).join("0")).substr(
+      0,
+      decimal + 1
+    );
   }
   for (var i = mod; i < size; i++) {
     tmp += integer.charAt(i);
@@ -99,5 +108,5 @@ export default {
   fen2yuan,
   yuan2fen,
   toText,
-  toCurrency
+  toCurrency,
 };
