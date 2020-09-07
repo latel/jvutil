@@ -22,33 +22,30 @@ exports.fen2yuan = function (val) {
 /**
  * 格式化大数为指定的单位，如：12345.67 => 1.23万
  * @param value 需要转换的数字
- * @param unit 单位（股/手/张等）
- * @param decimal 需要保留的小数位个数
- * @param level 转换最低级别，如需要超过10万才转换
+ * @param decimal 需要保留的小数位个数，默认两位
+ * @param options 额外参数
  */
-exports.toText = function (value, decimal, unit, level) {
+exports.toText = function (value, decimal, options) {
+    if (decimal === void 0) { decimal = 2; }
+    var _a = options || {}, _b = _a.unit /* 默认单位为空 */, unit = _b === void 0 ? "" : _b /* 默认单位为空 */, _c = _a.level /* 默认转换万以上的数字 */, level = _c === void 0 ? 10000 : _c /* 默认转换万以上的数字 */, _d = _a.strip /* 默认去除多余的尾部0，如1.20万->1.2万 */, strip = _d === void 0 ? true : _d /* 默认去除多余的尾部0，如1.20万->1.2万 */;
     var val = +value;
+    var ret = String(val);
     // 不对异常数据处理
     if (isNaN(val)) {
         return value;
     }
     var absVal = Math.abs(val);
-    // 默认转换万以上的数字
-    level = level || 10000;
-    // 默认保留两位小数
-    decimal = decimal === undefined ? 2 : decimal;
-    // 默认单位为空
-    unit = unit || "";
     if (absVal < Math.pow(10, 4) || absVal < level) {
-        val = val.toFixed(decimal);
+        ret = val.toFixed(decimal);
     }
     else if (absVal >= Math.pow(10, 4) && absVal < Math.pow(10, 8)) {
-        val = (val / 10000).toFixed(decimal) + "万";
+        ret = (val / 10000).toFixed(decimal) + "万";
     }
     else if (absVal >= Math.pow(10, 8) && absVal < Math.pow(10, 11)) {
-        val = (val / 100000000).toFixed(decimal) + "亿";
+        ret = (val / 100000000).toFixed(decimal) + "亿";
     }
-    return val + unit;
+    ret = strip ? ret.replace(/\.?0+$/, "") : ret;
+    return ret + unit;
 };
 /**
  * 转换为常用货币展示格式，按千分割数字，如：12345.67 => 12,345.67

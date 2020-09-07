@@ -1,42 +1,21 @@
-## 快速上手
+## jv函数辅助库
+
+包括:
+
++ math: 提供小数点精确的计算，加减乘除
++ amount: 用于格式化金额数字为常用的金融需要的格式，如1,234.00
++ detect: 用于判断系统、平台和机型
 
 ### 安装
 
 ```bash
-tnpm i -S @tencent/stockfe-util;
+tnpm i -S @jv/xxxx;
 ```
 
 ### 引用
 
 ```javascript
-import math from '@tencent/stockfe-util/math';
+import math from '@jv/xxxx/math';
 
 console.log(math.add(.002, .003));
 ```
-
-## 这个大礼包包含什么内容
-
-[参阅本模块的wiki](http://git.code.oa.com/westock/stockutil/wikis/home)
-
-
-## 开发准则
-
-### 按需引入
-
-为了保证业务方代码尽可能精简，支持按需引入，源码组织需按目录整理
-
-### 函数式
-
-只允许无副作用的纯函数式方法
-
-### MR
-
-鉴于基础库需要保证稳定性，所有修订必须走MR
-
-### Typescript
-
-为了确保基础库的安全，我们建议使用ts来编写函数库，但是仅限于基础的typescript基础语法和类型注释，不允许使用ts的高级特性
-
-### 测试
-
-所以函数库必须编写测试用例，新的版本发布时会自动跑自动化测试
