@@ -1,6 +1,6 @@
 {
   "name": "@jv/xxxx",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "jv utils library",
   "main": "index.js",
   "scripts": {

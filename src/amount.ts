@@ -127,4 +127,5 @@ export default {
   yuan2fen,
   toText,
   toCurrency,
+  modulo,
 };

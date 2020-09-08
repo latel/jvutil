@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var math_1 = require("./math");
 var REGEX_A_NUMBER = /^(-|\+)?[\d.]+$/;
 /**
  * 元单位转换为分单位
@@ -80,6 +81,20 @@ exports.toCurrency = function (val, decimal, strip) {
         }
     }
     return sign + start + tmp + bit;
+};
+/**
+ * 取模操作
+ * @param dividend 目标数字
+ * @param divisor 模
+ * @returns 余数
+ */
+exports.modulo = function (dividend, divisor) {
+    var dividendDecimalLen = (String(dividend).split('.')[1] || '').length || 0;
+    var divisorDecimalLen = (String(divisor).split('.')[1] || '').length || 0;
+    var decimalLen = Math.max(dividendDecimalLen, divisorDecimalLen);
+    var a = math_1.mul(dividend, Math.pow(10, decimalLen));
+    var b = math_1.mul(divisor, Math.pow(10, decimalLen));
+    return a % b;
 };
 exports["default"] = {
     fen2yuan: exports.fen2yuan,
