@@ -1,3 +1,5 @@
+import { mul } from './math';
+
 const REGEX_A_NUMBER = /^(-|\+)?[\d.]+$/;
 /**
  * 元单位转换为分单位
@@ -104,6 +106,21 @@ export const toCurrency = (val: number | string, decimal?: number, strip = true)
   }
   return sign + start + tmp + bit;
 };
+
+/**
+ * 取模操作
+ * @param dividend 目标数字
+ * @param divisor 模
+ * @returns 余数
+ */
+export const modulo = (dividend: number, divisor: number): number => {
+  const dividendDecimalLen = (String(dividend).split('.')[1] || '').length || 0;
+  const divisorDecimalLen = (String(divisor).split('.')[1] || '').length || 0;
+  const decimalLen = Math.max(dividendDecimalLen, divisorDecimalLen);
+  const a = mul(dividend, Math.pow(10, decimalLen));
+  const b = mul(divisor, Math.pow(10, decimalLen));
+  return a % b;
+}
 
 export default {
   fen2yuan,
