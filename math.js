@@ -95,6 +95,21 @@ var div = function (arg1, arg2, acc) {
     return +((r1 / r2) * Math.pow(10, t2 - t1)).toFixed(c);
 };
 exports.div = div;
+/**
+ * 取模操作
+ * @param dividend 目标数字
+ * @param divisor 模
+ * @returns 余数
+ */
+var modulo = function (dividend, divisor) {
+    var dividendDecimalLen = (String(dividend).split('.')[1] || '').length || 0;
+    var divisorDecimalLen = (String(divisor).split('.')[1] || '').length || 0;
+    var decimalLen = Math.max(dividendDecimalLen, divisorDecimalLen);
+    var a = mul(dividend, Math.pow(10, decimalLen));
+    var b = mul(divisor, Math.pow(10, decimalLen));
+    return a % b;
+};
+exports.modulo = modulo;
 // 判断两个数字是否相等
 var eq = function (a, b) {
     // 确保在非ts下也是一个数字

@@ -59,19 +59,19 @@ describe("amount", () => {
     });
   });
   describe("#toCurrency()", () => {
-    it('should return "1,234.00" from toCurrency(1234)', () => {
-      expect(toCurrency(1234)).to.equal("1,234.00");
+    it('toCurrency(1234)=1,234', () => {
+      expect(toCurrency(1234)).to.equal("1,234");
     });
-    it('low number test, should return "123.00" from toCurrency(123)', () => {
-      expect(toCurrency(123)).to.equal("123.00");
+    it('toCurrency(1234, 2, false)=1,234.00, strip tail zero test', () => {
+      expect(toCurrency(1234, 2, false)).to.equal("1,234.00");
     });
-    it('decimal test, should return "1,234,567.000" from toCurrency(1234567, 3)', () => {
-      expect(toCurrency(1234567, 3)).to.equal("1,234,567.000");
+    it('toCurrency(1234, 3, false)=1,234.000, decimal test', () => {
+      expect(toCurrency(1234, 3, false)).to.equal("1,234.000");
     });
-    it('decimal test, should return "1,234,567" from toCurrency(1234567, 0)', () => {
-      expect(toCurrency(1234567, 0)).to.equal("1,234,567");
+    it('toCurrency(123)=123, low number test', () => {
+      expect(toCurrency(123)).to.equal("123");
     });
-    it('expection test, should return "--" from toCurrency(--)', () => {
+    it('toCurrency(--)=--, exception test', () => {
       expect(toCurrency("--")).to.equal("--");
     });
   });

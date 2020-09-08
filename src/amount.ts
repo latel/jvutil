@@ -24,7 +24,7 @@ interface ToTextOptions {
   unit?: string;
   /** 转换最低级别，如需要超过10万才转换 */
   level?: number;
-  /** 是否尽可能的去除尾部多余的0，如1.200张->1.2张 */
+  /** 是否尽可能的去除尾部多余的0，如1.200张->1.2张，默认去除 */
   strip?: boolean;
 }
 
@@ -65,12 +65,11 @@ export const toText = (
 /**
  * 转换为常用货币展示格式，按千分割数字，如：12345.67 => 12,345.67
  * @param val 需要转换的数字
- * @param decimal 需要保留的小数位个数
- * @param strip 取出结尾多余的0，如12345.00 => 12,345.00
+ * @param decimal 需要保留的小数位个数，默认2位
+ * @param strip 去除结尾多余的0，如12345.00 => 12,345.00，默认去除
  */
-export const toCurrency = (val: number | string, decimal?: number, strip = true): string => {
+export const toCurrency = (val: number | string, decimal = 2, strip = true): string => {
   val = String(val) || "";
-  decimal = typeof decimal === "undefined" ? 2 : decimal;
   var pattern = /^(\-?)(\d+)(\.\d+)?$/,
     macher = pattern.exec(val);
   if (macher === null) {
@@ -102,6 +101,7 @@ export const toCurrency = (val: number | string, decimal?: number, strip = true)
       flag = 0;
     }
   }
+  bit = strip ? bit.replace(/\.?0+$/, '') : bit;
   return sign + start + tmp + bit;
 };
 
