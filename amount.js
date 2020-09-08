@@ -100,5 +100,6 @@ exports["default"] = {
     fen2yuan: exports.fen2yuan,
     yuan2fen: exports.yuan2fen,
     toText: exports.toText,
-    toCurrency: exports.toCurrency
+    toCurrency: exports.toCurrency,
+    modulo: exports.modulo
 };

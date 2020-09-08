@@ -93,6 +93,21 @@ const div = (arg1: number, arg2: number, acc: number = 2): number => {
   return +((r1 / r2) * Math.pow(10, t2 - t1)).toFixed(c);
 };
 
+/**
+ * 取模操作
+ * @param dividend 目标数字
+ * @param divisor 模
+ * @returns 余数
+ */
+const modulo = (dividend: number, divisor: number): number => {
+  const dividendDecimalLen = (String(dividend).split('.')[1] || '').length || 0;
+  const divisorDecimalLen = (String(divisor).split('.')[1] || '').length || 0;
+  const decimalLen = Math.max(dividendDecimalLen, divisorDecimalLen);
+  const a = mul(dividend, Math.pow(10, decimalLen));
+  const b = mul(divisor, Math.pow(10, decimalLen));
+  return a % b;
+}
+
 // 判断两个数字是否相等
 const eq = (a: number, b: number): boolean => {
   // 确保在非ts下也是一个数字
@@ -195,5 +210,5 @@ function math(initialValue: number) {
   return new AccMath(initialValue);
 }
 
-export { add, reduce, mul, div, eq, gt, lt };
+export { add, reduce, mul, div, eq, gt, lt, modulo };
 export default math;

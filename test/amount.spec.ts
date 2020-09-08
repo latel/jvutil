@@ -1,5 +1,5 @@
 import { expect, assert } from "chai";
-import { yuan2fen, fen2yuan, toText, toCurrency, modulo } from "../src/amount";
+import { yuan2fen, fen2yuan, toText, toCurrency } from "../src/amount";
 
 describe("amount", () => {
   describe("#yuan2fen()", () => {
@@ -73,20 +73,6 @@ describe("amount", () => {
     });
     it('expection test, should return "--" from toCurrency(--)', () => {
       expect(toCurrency("--")).to.equal("--");
-    });
-  });
-  describe("#modulo()", () => {
-    it('module(4, 2) = 0', () => {
-      expect(modulo(4, 2)).to.equal(0);
-    });
-    it('module(5, 2) = 0', () => {
-      expect(modulo(5, 2)).to.equal(1);
-    });
-    it('module(4.9, 0.1) = 0', () => {
-      expect(modulo(4.9, 0.1)).to.equal(0);
-    });
-    it('module(4.9, 0.01) = 0', () => {
-      expect(modulo(4.9, 0.01)).to.equal(0);
     });
   });
 });

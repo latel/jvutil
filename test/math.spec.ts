@@ -1,5 +1,5 @@
 import { expect, assert } from 'chai';
-import math, { add, reduce, div, mul, eq, lt, gt } from '../src/math';
+import math, { add, reduce, div, mul, eq, lt, gt, modulo } from '../src/math';
 
 describe('math', () => {
     describe('#add()', () => {
@@ -105,5 +105,19 @@ describe('math', () => {
         it('should return false as 0.003 is equal to 0.003(chain mode)', () => {
             expect(math(.003).gt(.003)).to.be.false;
         });
+    });
+    describe("#modulo()", () => {
+      it('module(4, 2) = 0', () => {
+        expect(modulo(4, 2)).to.equal(0);
+      });
+      it('module(5, 2) = 0', () => {
+        expect(modulo(5, 2)).to.equal(1);
+      });
+      it('module(4.9, 0.1) = 0', () => {
+        expect(modulo(4.9, 0.1)).to.equal(0);
+      });
+      it('module(4.9, 0.01) = 0', () => {
+        expect(modulo(4.9, 0.01)).to.equal(0);
+      });
     });
 });
