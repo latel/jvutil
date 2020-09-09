@@ -19,59 +19,77 @@ describe("amount", () => {
     });
   });
   describe("#toText()", () => {
-    it("should return 1.23亿 from toText(123456789)", () => {
-      expect(toText(123456789)).to.equal("1.23亿");
+    it('toText(123456789)=1.23亿', () => {
+      expect(toText(123456789)).to.eq('1.23亿');
     });
-    it("decimal test, should return 1.2346亿 from toText(123456789, 4)", () => {
-      expect(toText(123456789, 4)).to.equal("1.2346亿");
+    it('toText(12345)=1.23万', () => {
+      expect(toText(12345)).to.eq('1.23万');
     });
-    it("unit test, should return 1.2346亿手 from toText(123456789, 4, { unit: '手'})", () => {
-      expect(toText(123456789, 4, { unit: "手" })).to.equal("1.2346亿手");
+    it('toText(12345, 2, { baseline: 100000 })=12345.00', () => {
+      expect(toText(12345, 2, { baseline: 100000 })).to.eq('12345.00');
     });
-    it("default level test, should return 1234 from toText(1234)", () => {
-      expect(toText(1234)).to.equal("1234");
+    it('toText(123456, 2, { baseline: 100000 })=12.35万', () => {
+      expect(toText(123456, 2, { baseline: 100000 })).to.eq('12.35万');
     });
-    it("default level test, should return 1234.00 from toText(1234, 2, { strip: false })", () => {
-      expect(toText(1234, 2, { strip: false })).to.equal("1234.00");
+    it('toText(123446789, 0)=1亿', () => {
+      expect(toText(123446789, 0)).to.eq('1亿');
     });
-    it("level test, should return 10万 from toText(100000)", () => {
-      expect(toText(100000)).to.equal("10万");
+    it('toText(123446789, 3)=1.234亿', () => {
+      expect(toText(123446789, 3)).to.eq('1.234亿');
     });
-    it("level test, should return 1.2345万张 from toText(12345, 4, {unit:'张', level:10000})", () => {
-      expect(toText(12345, 4, { unit: "张", level: 10000 })).to.equal(
-        "1.2345万张"
-      );
+    it('toText(123446789, 4)=1.2345亿', () => {
+      expect(toText(123446789, 4)).to.eq('1.2345亿');
     });
-    it("level test, should return 12345.0000张 from toText(12345, 4, {unit:'张', level:10000, strip: false})", () => {
-      expect(
-        toText(12345, 4, { unit: "张", level: 100000, strip: false })
-      ).to.equal("12345.0000张");
+    it('toText(12345, 2, { unit: \'手\' })=1.23万手', () => {
+      expect(toText(12345, 2, { unit: '手' })).to.eq('1.23万手');
     });
-    it("level test, should return 1.23万张 from toText(123456, 2, {unit:'张', level:100000})", () => {
-      expect(toText(123456, 2, { unit: "张", level: 100000 })).to.equal(
-        "12.35万张"
-      );
+    it('toText(100000)=1.23万张', () => {
+      expect(toText(12345, 2, { unit: '张' })).to.eq('1.23万张');
     });
-    it("negative number test, should return -1.23万张 from toText(-123456, 2, {unit:'张', level:100000})", () => {
-      expect(toText(-123456, 2, { unit: "张", level: 100000 })).to.equal(
+    it('toText(100000)=10.00万', () => {
+      expect(toText(100000)).to.eq('10.00万');
+    });
+    it('toText(100000, 2, { strip: true })=10万', () => {
+      expect(toText(100000, 2, { strip: true })).to.eq('10万');
+    });
+    it('toText(101000, 3)=10.100万', () => {
+      expect(toText(101000, 3)).to.eq('10.100万');
+    });
+    it('toText(101000, 3, { strip: true })=10.1万', () => {
+      expect(toText(101000, 3, { strip: true })).to.eq('10.1万');
+    });
+    it("toText(-123456, 2, {unit:'张', level:100000})=-1.23万张, 负数测试", () => {
+      expect(toText(-123456, 2, { unit: "张", baseline: 100000 })).to.equal(
         "-12.35万张"
       );
     });
   });
   describe("#toCurrency()", () => {
-    it('toCurrency(1234)=1,234', () => {
-      expect(toCurrency(1234)).to.equal("1,234");
+    it('toCurrency(1234)=1,234.00', () => {
+      expect(toCurrency(1234)).to.equal("1,234.00");
     });
-    it('toCurrency(1234, 2, false)=1,234.00, strip tail zero test', () => {
-      expect(toCurrency(1234, 2, false)).to.equal("1,234.00");
+    it('toCurrency(1234, 3)=1,234.000', () => {
+      expect(toCurrency(1234, 3)).to.equal("1,234.000");
     });
-    it('toCurrency(1234, 3, false)=1,234.000, decimal test', () => {
-      expect(toCurrency(1234, 3, false)).to.equal("1,234.000");
+    it('toCurrency(1234.1, 3)=1,234.100', () => {
+      expect(toCurrency(1234.1, 3)).to.equal("1,234.100");
     });
-    it('toCurrency(123)=123, low number test', () => {
-      expect(toCurrency(123)).to.equal("123");
+    it('toCurrency(12345, 3)=12,345.000', () => {
+      expect(toCurrency(12345, 3)).to.equal("12,345.000");
     });
-    it('toCurrency(--)=--, exception test', () => {
+    it('toCurrency(12345.618, 1)=12,345.6', () => {
+      expect(toCurrency(12345.618, 1)).to.equal("12,345.6");
+    });
+    it('toCurrency(12345.618, 2)=12,345.62', () => {
+      expect(toCurrency(12345.618, 2)).to.equal("12,345.62");
+    });
+    it('toCurrency(12345, 3, true)=12,345', () => {
+      expect(toCurrency(12345, 3, true)).to.equal("12,345");
+    });
+    it('toCurrency(12345.1, 3, true)=12,345.1', () => {
+      expect(toCurrency(12345.1, 3, true)).to.equal("12,345.1");
+    });
+    it('toCurrency(--)=--, 异常数字测试', () => {
       expect(toCurrency("--")).to.equal("--");
     });
   });
