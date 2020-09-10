@@ -1,0 +1,9 @@
+{
+  "name": "@jv/utils-math",
+  "amdName": "jvUtilMath",
+  "version": "1.0.0",
+  "description": "operate decimal numbers accurately",
+  "main": "dist/math.js",
+  "source": "src/index.ts",
+  "types": "dist/index.d.ts"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@jv/utils-amount",
+  "amdName": "jvUtilAmount",
+  "version": "1.0.0",
+  "description": "useful formatting tools for finance numbers",
+  "main": "dist/amount.js",
+  "source": "src/index.ts",
+  "types": "dist/index.d.ts"
+}

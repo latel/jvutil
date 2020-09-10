@@ -70,16 +70,23 @@ export const toText = (
  * @param decimal 需要保留的小数位个数，默认2位，切割时遵循四舍五入
  * @param strip 是否去除结尾多余的0，如12345.10 => 12,345.1，默认去除
  */
-export const toCurrency = (val: number | string, decimal = 2, strip = false): string => {
-  val = String(val) || '';
+export const toCurrency = (
+  val: number | string,
+  decimal = 2,
+  strip = false
+): string => {
+  val = String(val) || "";
   if (!/^(\-?)(\d+)(\.\d+)?$/.exec(val)) {
     return val;
   }
   let valStr = Number(val).toFixed(decimal);
-  valStr = valStr.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-  valStr = strip ? valStr.replace(/\.?0+$/, '') : valStr;
+  const [integer, dec] = valStr.split(".");
+  valStr = [integer.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), dec].join(
+    "."
+  );
+  valStr = strip ? valStr.replace(/\.?0+$/, "") : valStr;
   return valStr;
-}
+};
 
 export default {
   fen2yuan,

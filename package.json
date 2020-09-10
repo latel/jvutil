@@ -1,41 +1,39 @@
 {
-  "name": "@jv/xxxx",
-  "version": "1.2.5",
+  "name": "@jv/util",
+  "amdName": "jvUtil",
+  "version": "2.0.0",
   "description": "jv utils library",
-  "main": "index.js",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "exports": {
+    ".": {
+      "import": "./dist/jvutil.mjs",
+      "require": "./dist/jvutil.js"
+    },
+    "./amount": {
+      "import": "./amount/dist/amount.mjs",
+      "require": "./amount/dist/amount.js"
+    },
+    "./math": {
+      "import": "./math/dist/math.mjs",
+      "require": "./math/dist/math.js"
+    }
+  },
   "scripts": {
-    "dev": "npm run test -- --watch --watch-extensions ts",
-    "test": "node_modules/.bin/mocha -r ts-node/register -r jsdom-global/register test/**/*.spec.ts",
-    "spec": "node_modules/.bin/mocha -r ts-node/register -r jsdom-global/register test/**/*.spec.ts -R markdown > test/spec.md",
-    "build": "tsc ./src/* --outDir .",
-    "prepublishOnly": "npm run test && npm run spec && npm run build"
+    "build": "npm-run-all --parallel build:*",
+    "build:amount": "microbundle build --raw --cwd amount",
+    "build:math": "microbundle build --raw --cwd math",
+    "prepublishOnly": "npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@git.code.oa.com:westock/stockutil.git"
-  },
-  "keywords": [
-    "stockfe",
-    "util",
-    "library"
-  ],
-  "authors": [
-    "kevinnwang <kevinnwang@tencent.com> (http://kezhen.info)"
-  ],
-  "license": "ISC",
   "dependencies": {
     "lodash-es": "^4.17.11"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.4",
-    "@types/jsdom": "^12.2.0",
-    "@types/lodash": "^4.14.118",
-    "@types/mocha": "^5.2.4",
-    "chai": "^4.1.2",
-    "jsdom": "^13.2.0",
-    "jsdom-global": "^3.0.2",
-    "mocha": "^5.2.0",
-    "ts-node": "^7.0.0",
-    "typescript": "^2.9.2"
+    "@babel/helper-module-imports": "^7.10.4",
+    "babel-plugin-macros": "^2.8.0",
+    "babel-plugin-tester": "^9.2.0",
+    "microbundle": "^0.12.3",
+    "npm-run-all": "^4.1.5"
   }
 }

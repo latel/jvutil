@@ -98,11 +98,3 @@ os.phone = !!(
 );
 
 export { os, browser };
-let IS_IPHONEX = false;
-if (os.ios) {
-  if (screen.height == 812 && screen.width == 375) {
-    IS_IPHONEX = true;
-  }
-}
-
-export { IS_IPHONEX };
