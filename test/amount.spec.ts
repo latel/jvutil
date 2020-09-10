@@ -89,7 +89,7 @@ describe("amount", () => {
     it('toCurrency(12345.1, 3, true)=12,345.1', () => {
       expect(toCurrency(12345.1, 3, true)).to.equal("12,345.1");
     });
-    it('toCurrency(--)=--, 异常数字测试', () => {
+    it('toCurrency(’--‘)=--, 异常数字测试', () => {
       expect(toCurrency("--")).to.equal("--");
     });
   });

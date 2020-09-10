@@ -63,47 +63,23 @@ export const toText = (
 };
 
 /**
- * 转换为常用货币展示格式，按千分割数字，如：12345.67 => 12,345.67
+ * 转换为常用货币展示格式，按千分割数字，如：-12345.6 => -12,345.60
+ *
+ * *如果收到异常数据，则会原样返回*
  * @param val 需要转换的数字
  * @param decimal 需要保留的小数位个数，默认2位，切割时遵循四舍五入
- * @param strip 去除结尾多余的0，如12345.00 => 12,345.00，默认去除
+ * @param strip 是否去除结尾多余的0，如12345.10 => 12,345.1，默认去除
  */
 export const toCurrency = (val: number | string, decimal = 2, strip = false): string => {
-  val = String(val) || "";
-  var pattern = /^(\-?)(\d+)(\.\d+)?$/,
-    macher = pattern.exec(val);
-  if (macher === null) {
+  val = String(val) || '';
+  if (!/^(\-?)(\d+)(\.\d+)?$/.exec(val)) {
     return val;
   }
-  var sign = null != macher ? RegExp.$1 || "" : "",
-    integer = null != macher ? RegExp.$2 || "0" : "0",
-    bit = null != macher ? RegExp.$3 || ".00" : ".00",
-    size = integer.length,
-    mod = size > 3 ? size % 3 : 0,
-    tmp = "",
-    start = 0 == mod ? "" : integer.substr(0, mod) + ",",
-    flag = 0;
-  if (decimal == 0) {
-    bit = "";
-  } else if (bit.length >= decimal + 1) {
-    bit = bit.substr(0, decimal + 1);
-  } else {
-    bit = (bit + new Array(decimal + 1 - bit.length + 1).join("0")).substr(
-      0,
-      decimal + 1
-    );
-  }
-  for (var i = mod; i < size; i++) {
-    tmp += integer.charAt(i);
-    flag++;
-    if (flag % 3 == 0 && i < size - 1) {
-      tmp += ",";
-      flag = 0;
-    }
-  }
-  bit = strip ? bit.replace(/\.?0+$/, '') : bit;
-  return sign + start + tmp + bit;
-};
+  let valStr = Number(val).toFixed(decimal);
+  valStr = valStr.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+  valStr = strip ? valStr.replace(/\.?0+$/, '') : valStr;
+  return valStr;
+}
 
 export default {
   fen2yuan,

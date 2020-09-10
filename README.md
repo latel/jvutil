@@ -45,6 +45,8 @@ toCurrency(12345.618, 2); // => 12,345.62
 toCurrency(12345, 3); // => 12,345.000
 toCurrency(12345, 3, true); // => 12,345
 toCurrency(12345.1, 3, true); // => 12,345.1
+// 异常数据原样返回
+toCurrency('--'); // => --
 ```
 
 #### amount#toText
