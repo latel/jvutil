@@ -1,5 +1,5 @@
-import { expect, assert } from "chai";
-import { yuan2fen, fen2yuan, toText, toCurrency } from "../src/amount";
+import { expect } from "chai";
+import { yuan2fen, fen2yuan, toText, toCurrency } from "../dist/";
 
 describe("amount", () => {
   describe("#yuan2fen()", () => {

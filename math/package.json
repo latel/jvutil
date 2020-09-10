@@ -3,7 +3,7 @@
   "amdName": "jvUtilMath",
   "version": "1.0.0",
   "description": "operate decimal numbers accurately",
-  "main": "dist/math.js",
   "source": "src/index.ts",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts"
 }

@@ -12,28 +12,33 @@
       "require": "./dist/jvutil.js"
     },
     "./amount": {
-      "import": "./amount/dist/amount.mjs",
-      "require": "./amount/dist/amount.js"
+      "import": "./amount/dist/index.mjs",
+      "require": "./amount/dist/index.js"
     },
     "./math": {
-      "import": "./math/dist/math.mjs",
-      "require": "./math/dist/math.js"
+      "import": "./math/dist/index.mjs",
+      "require": "./math/dist/index.js"
     }
   },
   "scripts": {
     "build": "npm-run-all --parallel build:*",
     "build:amount": "microbundle build --raw --cwd amount",
     "build:math": "microbundle build --raw --cwd math",
-    "prepublishOnly": "npm run build"
-  },
-  "dependencies": {
-    "lodash-es": "^4.17.11"
+    "test": "npm-run-all build test:*",
+    "test:amount": "mocha --recursive --require \"@babel/register\" amount/test/**/*.spec.js",
+    "test:math": "mocha --recursive --require \"@babel/register\" math/test/**/*.spec.js",
+    "prepublishOnly": "npm run test"
   },
   "devDependencies": {
     "@babel/helper-module-imports": "^7.10.4",
+    "@babel/register": "^7.11.5",
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.3",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-tester": "^9.2.0",
+    "chai": "^4.2.0",
     "microbundle": "^0.12.3",
+    "mocha": "^8.1.3",
     "npm-run-all": "^4.1.5"
   }
 }
