@@ -1,8 +1,8 @@
 {
-  "name": "@jv/util-math",
-  "amdName": "jvUtilMath",
+  "name": "@jv/util-version",
+  "amdName": "jvUtilVersion",
   "version": "1.0.0",
-  "description": "operate decimal numbers accurately",
+  "description": "compare semantic versions",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts"

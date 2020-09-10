@@ -1,0 +1,2 @@
+const t=(t,e)=>{let n=t.split("."),s=e.split(".");const l=Math.max(n.length,s.length);for(;n.length<l;)n.push("0");for(;s.length<l;)s.push("0");for(let t=0;t<l;t++){const e=parseInt(n[t]),l=parseInt(s[t]);if(e>l)return 1;if(e<l)return-1}return 0},e=(e="",n="")=>[1].includes(t(e,n)),n=(e="",n="")=>[1,0].includes(t(e,n)),s=(e="",n="")=>[-1].includes(t(e,n)),l=(e="",n="")=>[-1,0].includes(t(e,n));export{t as compare,e as gt,n as gte,s as lt,l as lte};
+//# sourceMappingURL=index.modern.js.map

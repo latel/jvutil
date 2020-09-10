@@ -1,5 +1,5 @@
 {
-  "name": "@jv/utils-amount",
+  "name": "@jv/util-amount",
   "amdName": "jvUtilAmount",
   "version": "1.0.0",
   "description": "useful formatting tools for finance numbers",

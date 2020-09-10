@@ -18,15 +18,21 @@
     "./math": {
       "import": "./math/dist/index.mjs",
       "require": "./math/dist/index.js"
+    },
+    "./version": {
+      "import": "./version/dist/index.mjs",
+      "require": "./version/dist/index.js"
     }
   },
   "scripts": {
     "build": "npm-run-all --parallel build:*",
     "build:amount": "microbundle build --raw --cwd amount",
     "build:math": "microbundle build --raw --cwd math",
+    "build:version": "microbundle build --raw --cwd version",
     "test": "npm-run-all build test:*",
     "test:amount": "mocha --recursive --require \"@babel/register\" amount/test/**/*.spec.js",
     "test:math": "mocha --recursive --require \"@babel/register\" math/test/**/*.spec.js",
+    "test:version": "mocha --recursive --require \"@babel/register\" version/test/**/*.spec.js",
     "prepublishOnly": "npm run test"
   },
   "devDependencies": {
