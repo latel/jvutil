@@ -1,6 +1,6 @@
 // 浮点数安全的计算模块
 // 数字相加
-export const add = (arg1: number, arg2: number): number => {
+export const add = (arg1: number | string, arg2: number | string): number => {
   var r1, r2, m, c;
   var s1 = arg1.toString(),
     s2 = arg2.toString();
@@ -33,26 +33,28 @@ export const add = (arg1: number, arg2: number): number => {
 };
 
 // 数字相减
-export const reduce = (arg1: number, arg2: number): number => {
+export const reduce = (arg1: number | string, arg2: number | string): number => {
+  arg1 = arg1.toString();
+  arg2 = arg2.toString();
   var r1, r2, m, c;
   try {
-    r1 = arg1.toString().split(".")[1].length;
+    r1 = arg1.split(".")[1].length;
   } catch (e) {
     r1 = 0;
   }
   try {
-    r2 = arg2.toString().split(".")[1].length;
+    r2 = arg2.split(".")[1].length;
   } catch (e) {
     r2 = 0;
   }
 
   c = Math.max(r1, r2);
   m = Math.pow(10, c);
-  return +((arg1 * m - arg2 * m) / m).toFixed(c);
+  return +((+arg1 * m - +arg2 * m) / m).toFixed(c);
 };
 
 // 数字相乘
-export const mul = (arg1: number, arg2: number) => {
+export const mul = (arg1: number | string, arg2: number | string) => {
   var m = 0,
     s1 = arg1.toString(),
     s2 = arg2.toString();
@@ -69,7 +71,7 @@ export const mul = (arg1: number, arg2: number) => {
 };
 
 // 数字相除
-export const div = (arg1: number, arg2: number, acc: number = 2): number => {
+export const div = (arg1: number | string, arg2: number | string, acc: number = 2): number => {
   var t1 = 0,
     t2 = 0,
     r1,
@@ -96,7 +98,7 @@ export const div = (arg1: number, arg2: number, acc: number = 2): number => {
  * @param divisor 模
  * @returns 余数
  */
-export const modulo = (dividend: number, divisor: number): number => {
+export const modulo = (dividend: number | string, divisor: number | string): number => {
   const dividendDecimalLen = (String(dividend).split(".")[1] || "").length || 0;
   const divisorDecimalLen = (String(divisor).split(".")[1] || "").length || 0;
   const decimalLen = Math.max(dividendDecimalLen, divisorDecimalLen);

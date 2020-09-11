@@ -24,7 +24,7 @@ interface ToTextOptions {
   unit?: string;
   /** 接受转换最低金额，如指定超过10万才处理转换 */
   baseline?: number;
-  /** 是否尽可能的去除尾部多余的0，如1.200张->1.2张，默认去除 */
+  /** 是否尽可能的去除尾部多余的0，如1.200张->1.2张，默认不去除 */
   strip?: boolean;
 }
 
@@ -42,7 +42,7 @@ export const toText = (
   const {
     unit = "" /* 默认单位为空 */,
     baseline = 10000 /* 默认转换万以上的数字 */,
-    strip = false /* 默认去除多余的尾部0，如1.20万->1.2万 */,
+    strip = false /* 默认不去除多余的尾部0 */,
   } = options || {};
   let val: number = +value;
   let ret: string = String(val);
@@ -68,7 +68,7 @@ export const toText = (
  * *如果收到异常数据，则会原样返回*
  * @param val 需要转换的数字
  * @param decimal 需要保留的小数位个数，默认2位，切割时遵循四舍五入
- * @param strip 是否去除结尾多余的0，如12345.10 => 12,345.1，默认去除
+ * @param strip 是否去除结尾多余的0，如12345.10 => 12,345.1，默认不去除
  */
 export const toCurrency = (
   val: number | string,

@@ -13,7 +13,7 @@ interface ToTextOptions {
     unit?: string;
     /** 接受转换最低金额，如指定超过10万才处理转换 */
     baseline?: number;
-    /** 是否尽可能的去除尾部多余的0，如1.200张->1.2张，默认去除 */
+    /** 是否尽可能的去除尾部多余的0，如1.200张->1.2张，默认不去除 */
     strip?: boolean;
 }
 /**
@@ -29,7 +29,7 @@ export declare const toText: (value: number | string, decimal?: number, options?
  * *如果收到异常数据，则会原样返回*
  * @param val 需要转换的数字
  * @param decimal 需要保留的小数位个数，默认2位，切割时遵循四舍五入
- * @param strip 是否去除结尾多余的0，如12345.10 => 12,345.1，默认去除
+ * @param strip 是否去除结尾多余的0，如12345.10 => 12,345.1，默认不去除
  */
 export declare const toCurrency: (val: number | string, decimal?: number, strip?: boolean) => string;
 declare const _default: {
