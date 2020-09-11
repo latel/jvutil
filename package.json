@@ -1,7 +1,7 @@
 {
   "name": "@jv/util",
   "amdName": "jvUtil",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "jv utils library",
   "source": "src/index.ts",
   "main": "dist/index.js",

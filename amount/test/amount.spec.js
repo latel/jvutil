@@ -71,6 +71,9 @@ describe("amount", () => {
     it('toCurrency(1234, 3)=1,234.000', () => {
       expect(toCurrency(1234, 3)).to.equal("1,234.000");
     });
+    it('toCurrency(1234, 0)=1,234', () => {
+      expect(toCurrency(1234, 0)).to.equal("1,234");
+    });
     it('toCurrency(1234.1, 3)=1,234.100', () => {
       expect(toCurrency(1234.1, 3)).to.equal("1,234.100");
     });

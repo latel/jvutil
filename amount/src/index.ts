@@ -81,7 +81,7 @@ export const toCurrency = (
   }
   let valStr = Number(val).toFixed(decimal);
   const [integer, dec] = valStr.split(".");
-  valStr = [integer.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), dec].join(
+  valStr = [integer.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), dec].filter(Boolean).join(
     "."
   );
   valStr = strip ? valStr.replace(/\.?0+$/, "") : valStr;
