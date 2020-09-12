@@ -11,13 +11,13 @@
 ### 安装
 
 ```bash
-tnpm i -S @jv/xxxx;
+tnpm i -S @jv/util;
 ```
 
 ### 引用
 
 ```javascript
-import math from '@jv/xxxx/math';
+import math from '@jv/util/math';
 
 console.log(math.add(.002, .003));
 ```
@@ -30,7 +30,7 @@ console.log(math.add(.002, .003));
 转换为常用货币展示格式，按千分割数字，如：12345.67 => 12,345.67
 
 ```javascript
-import { toCurrency } from '@jv/xxxx/amount';
+import { toCurrency } from '@jv/util/amount';
 
 // 默认两位小数
 toCurrency(12345); // => 12,345.00
@@ -54,7 +54,7 @@ toCurrency('--'); // => --
 格式化大数为指定的单位，如：12345.67 => 1.23万
 
 ```javascript
-import { toText } from '@jv/xxxx/amount';
+import { toText } from '@jv/util/amount';
 
 // 自带万和亿两个档位的级别，默认2位小数
 toText(123456789); // => 1.23亿
