@@ -1,0 +1,8 @@
+{
+    "name": "@jv/util-mathmacro",
+    "amdName": "jvUtilMathMacro",
+    "version": "1.0.0",
+    "description": "use jvutil-math with macro",
+    "source": "src/index.js",
+    "main": "dist/index.js"
+}
