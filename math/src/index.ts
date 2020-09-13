@@ -1,5 +1,7 @@
 // 浮点数安全的计算模块
-// 数字相加
+/**
+ * 数字相加
+ */
 export const add = (arg1: number | string, arg2: number | string): number => {
   var r1, r2, m, c;
   var s1 = arg1.toString(),
@@ -32,7 +34,9 @@ export const add = (arg1: number | string, arg2: number | string): number => {
   return (arg1 + arg2) / m;
 };
 
-// 数字相减
+/**
+ * 数字相减
+ */
 export const reduce = (arg1: number | string, arg2: number | string): number => {
   arg1 = arg1.toString();
   arg2 = arg2.toString();
@@ -53,7 +57,9 @@ export const reduce = (arg1: number | string, arg2: number | string): number => 
   return +((+arg1 * m - +arg2 * m) / m).toFixed(c);
 };
 
-// 数字相乘
+/**
+ * 数字相乘
+ */
 export const mul = (arg1: number | string, arg2: number | string) => {
   var m = 0,
     s1 = arg1.toString(),
@@ -70,7 +76,9 @@ export const mul = (arg1: number | string, arg2: number | string) => {
   );
 };
 
-// 数字相除
+/**
+ * 数字相除
+ */
 export const div = (arg1: number | string, arg2: number | string, acc: number = 2): number => {
   var t1 = 0,
     t2 = 0,
